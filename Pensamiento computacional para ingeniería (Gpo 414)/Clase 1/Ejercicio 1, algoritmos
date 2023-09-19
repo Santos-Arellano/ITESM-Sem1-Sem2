@@ -1,0 +1,7 @@
+    Print ("Cual es el valor?")
+    Precio=int(input())
+     if Precio > 0: 
+    print ("El precio es valido")
+   else:
+    print ("El precio no es valido")
+     

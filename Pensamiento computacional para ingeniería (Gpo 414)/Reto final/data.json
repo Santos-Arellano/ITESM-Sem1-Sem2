@@ -1,0 +1,132 @@
+{
+    "question": [
+      "(ecuaciones cuadráticas)  P1.Resuelve la ecuación x²-5x+6=0",
+      "P2. Resuelve la ecuación 2x²-7x+3=0",
+      "P3. Resuelve la ecuación -x²+7x-10=0",
+      "P4. Resuelve la ecuación x²+(x+2)²=580? ",
+      "P5. Las soluciones de la ecuación x² + x - 12 = 0 son:",
+      "P6. Las soluciones de la ecuación -x² + 6x -8 = 0 son:",
+      "P7. La ecuación 3x² = -x² tiene por solución: ",
+      "P8. La ecuación 9x² = -15x tiene…",
+      "P9 La ecuación 2x^3 - 162x = 0 tiene…",
+      "P10.(Español)¿Cuál es el primer paso antes de iniciar a investigar?",
+      "P11. ¿Cuál sería la definición más acertada para reglamento?",
+      "P12.Una lengua originaria es aquella que:",
+      "P13. Un reglamento nos sirve para que podamos",
+      "P14. Una de las principales características de las leyendas es que ",
+      "P15.(Historia) El periodo en el que aparecieron la agricultura y los asentamientos sedentarios se llama:",
+      "P16. (Ortografia) elige la oración en la que 'cual' lleva acento ",
+      "P17.¿cuál oración está escrita bien?"
+    ],
+    "answer": [
+      1,
+      3,
+      2,
+      2,
+      2,
+      1,
+      3,
+      1,
+      1,
+      1,
+      4,
+      3,
+      3,
+      4,
+      2,
+      2,
+      4
+    ],
+    "options": [
+  
+      ["x1=3 y x2=2",  
+        "x1=6 y x2=8",
+        "x2=3 y x2=3",
+        "x1=2 y x2=3"
+      ],
+      ["X1=1/2 Y X2=3",
+        "y1=2 y y2=3",
+        "X1=3 Y X2=1/2",
+        "Ninguna de las anterioes"
+      ],
+      ["x1=4 Y X2=7",
+        "x1=2 Y X2=5",
+        "x1=0 Y X2=-1",
+        "x1=2 y x2=2"
+      ],
+      ["x1=150 y x2=300",
+        "x1=16 y x2=-18",
+        "x1=5 y x2=-5",
+        "x1=20 y x2=-2"
+      ],
+      ["x1=-3 y x2=4",
+        "x1=3 y x2=-4",
+        "x1=-3 y x2=-4",
+        "No tiene soluciones"
+      ],
+      ["x1=2 y x2=4",
+        "x1=2 y x2=-4",
+        "x1=-2 y x2=-4",
+        "No tiene soluciones"
+      ],
+      ["x = 0",
+      "x = 1",
+      "x = 4",
+      "No tiene soluciones"
+      ],
+      ["Dos soluciones que son: x1 = 0 y x2 = -5/3",
+        "Dos soluciones que son: x1 = 0 y x2 = 5/3",
+        "Una solución que es: x = 0",
+        "No tiene soluciones"
+      ],
+      ["Una solución que es: x = 0",
+        "Dos soluciones que son: x1 = 0 y x2 = 9",
+        "Dos soluciones que son: x1 = 0 , x2 = 9 y x3 = -9",
+        "No tiene soluciones"
+      ],
+
+      ["Planear que es lo que iba a investigar",
+        "Seleccionar la información",
+        "Iniciar la búsqueda",
+        "Guardarla y registrarla"
+      ],
+
+      ["Texto de un lugar específico.",
+        "Documento de reglas generales.",
+        "Texto que da instrucciones.",
+        "Documento integrado por un conjunto de reglas que se deben acatar en un lugar determinado."
+      ],
+
+      ["Se está muriendo.",
+        "Origina nuevas lenguas.",
+        "Se hablan en nuestro país desde antes de la llegada de los españoles",
+        "Hablan todos."
+      ],
+      ["Conocer los verbos imperativos.",
+        "Estudiar los fenómenos naturales.",
+        "Participar con orden en la comunidad.",
+        "Evitar el contacto entre seres humanos."
+      ],
+      ["De tradición escrita.",
+        "De tradición popular.",
+        "Que habla de los cotidiano.",
+        "Que habla de dioses y héroes."
+      ],
+      ["Edad Media",
+        "Neolítico.",
+        "Paleolítico.",
+        "Ninguna de las anteriores."
+      ],
+      ["'Se puso a llorar cual bebé'.",
+        "'No sé cual es su estrategia, pero me intriga'.",
+        "'Sentí temblar la silla sobre la cual estaba sentada'",
+        "Ninguna de las anteriores."
+      ],
+      ["'¿Quien va a venir a mi fiesta? Quién quiera, puede.'",
+        "'¿Quien va a venir a mi fiesta? Quien quiera, puede'.",
+        "'Vas a venir a mi fiesta ?'",
+        "'¿Quién va a venir a mi fiesta? Quien quiera, puede'"
+      ]
+
+    ]
+  }

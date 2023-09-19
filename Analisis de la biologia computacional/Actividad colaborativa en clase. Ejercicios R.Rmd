@@ -1,0 +1,63 @@
+---
+title: "Actividad colaborativa en clase | Ejercicios R"
+output: html_document
+date: "2023-04-14"
+Santos ALejandro Arellano Olarte
+Arturo Ramos Martinez
+---
+```{r}
+secuenciaAleaoria<-function(){
+  num = readline();
+  lista_ADN<-c("A","T","C","G")
+  randADN <-sample(lista_ADN,num,replace=T)
+  return (paste(randADN, collapse = ''))
+}
+secuenciaAleaoria()
+```
+
+```{r}
+library(stringr)
+
+len_ADN <- function(secuencia){
+  l <- str_length(secuencia)
+  return(sprintf("El tamaño de la secuencia es: %s", l))
+}
+
+ADN <- "CTACCCCAGAATTGCTATAAACTGGCTGTCAGGGACTCTGTCTTGTAACTAAGCACTCCATCAGTACTACATAAGGCTGTAGGCGAAGAGAGACGAAAAC"
+cat(len_ADN(ADN), "\n")
+
+```
+
+
+```{r}
+porcentaje_bases <- function(secuencia) {
+  
+  # Calcular la longitud total de la secuencia
+  n <- nchar(secuencia)
+  
+  # Contar el número de ocurrencias de cada base
+  num_A <- nchar(gsub("[^A]", "", secuencia))
+  num_C <- nchar(gsub("[^C]", "", secuencia))
+  num_G <- nchar(gsub("[^G]", "", secuencia))
+  num_T <- nchar(gsub("[^T]", "", secuencia))
+  
+  # Calcular el porcentaje de cada base
+  porc_A <- num_A / n * 100
+  porc_C <- num_C / n * 100
+  porc_G <- num_G / n * 100
+  porc_T <- num_T / n * 100
+  
+  # Imprimir los resultados
+  cat(sprintf("Porcentaje de A: %.2f%%\n", porc_A))
+  cat(sprintf("Porcentaje de C: %.2f%%\n", porc_C))
+  cat(sprintf("Porcentaje de G: %.2f%%\n", porc_G))
+  cat(sprintf("Porcentaje de T: %.2f%%\n", porc_T))
+}
+
+ (ADN) 
+porcentaje_bases(ADN)
+
+```
+
+
+

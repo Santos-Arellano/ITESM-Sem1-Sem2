@@ -1,0 +1,124 @@
+---
+title: "Evidencia2"
+author: "Arellano Olarte Santos Alejandro A01643742, Diego Iván Morales Gallardo A01643382"
+date: "2023-07-05"
+output: html_document
+---
+
+NS-1
+Sino1-11
+GZ02
+GD01
+Wuhan-Hu-1
+2019-nCoV/USA-WA1/2020
+Tor2
+MA15
+TW1
+ZS-C
+LC5
+LC3
+ZS-B
+HSZ-Cc
+HZS2-C
+HSZ2-A
+GZ-C
+SZ16
+TW9
+HGZ8L1-A
+SZ3
+
+```{r}
+virus <- c("JX869059", "AY508724", "MN908947", "AY390556", "MN985325", "NC_004718", "DQ497008", "AY291451", "AY395003", "AY395002", "AY395000", "AY394996", "AY394995", "AY394992", "AY394983", "AY394979", "AY304488", "AY502932", "AY394981", "AY304486")
+
+```
+
+```{r}
+if (!require("BiocManager", quietly = TRUE))
+ install.packages("BiocManager")
+BiocManager::install("Biostrings")
+BiocManager::install("ggtree")
+BiocManager::install("DECIPHER")
+BiocManager::install("ggmsa")
+installed.packages("adegenet")
+install.packages("seqinr")
+library(seqinr)
+library(ape)
+library(phytools)
+library(Biostrings)
+library(seqinr)
+library(ggtree)
+library(DECIPHER)
+library(viridis)
+library(ggplot2)
+library(adegenet)
+```
+```{r}
+virus_sequences <- read.GenBank(virus)
+intento <- read.GenBank("JX869059")
+str(virus_sequences)
+attributes(virus_sequences)
+names(virus_sequences)
+attr(virus_sequences, "species")
+write.dna(virus_sequences,  file ="virus_seqs.fasta", format = "fasta", append =
+FALSE, nbcol = 6, colsep = " ", colw = 10)
+virus_seq_no_alineadas <- readDNAStringSet("virus_seqs.fasta", format = "fasta")
+virus_seq_no_alineadas <- OrientNucleotides(virus_seq_no_alineadas)
+virus_align_seqs <- AlignSeqs(virus_seq_no_alineadas)
+writeXStringSet(virus_align_seqs, file = "virus_align_seq.fasta")
+virus_aligned <- read.alignment("virus_align_seq.fasta", format = "fasta") 
+```
+
+```{r}
+print("Longitudes")
+for (i in 1:20) {
+  print(length(virus_sequences[[i]]))
+}
+
+```
+
+```{r}
+setwd("/Users/santosarellanoolarte/Downloads/Reto R")
+SARS_COV2 <- read.fasta("virus_seqs.fasta")
+compara <- function(seq1){
+  par(mfrow=c(1,4))
+  for (i in 1:20) {
+    barplot(table(seq1[i]), col=1:5)
+  }
+}
+compara(SARS_COV2)
+
+```
+
+```{r}
+matriz_distancia <- dist.alignment(virus_aligned, matrix = "similarity")
+virus_filogenetico <- nj(matriz_distancia)
+virus_plot_filogenetico <- ladderize(virus_filogenetico)
+plot_virus <- ggtree(virus_plot_filogenetico) + geom_tiplab()
+plot_virus
+
+```
+
+*Agrega una interpretación escrita de tus gráficas y tus conclusiones según el caso de estudio que seleccionaste. No olvides sustentar tus argumentos con las lecturas que realizaste.*
+
+Las gráficas generadas en el código muestran el análisis filogenético de 20 virus diferentes, incluyendo el SARS-CoV-2 y otros coronavirus humanos que ocasionan enfermedades similares.
+
+En la primera gráfica, que muestra la comparación de las bases nucleotídicas en las secuencias de los virus, podemos observar las frecuencias de cada base en cada posición de la secuencia. Esto nos permite identificar similitudes y diferencias en las secuencias genéticas de los virus analizados. En el caso del SARS-CoV-2 y otros coronavirus humanos, podemos buscar patrones comunes en las bases nucleotídicas que podrían estar asociados a su capacidad de infectar a los seres humanos.
+
+La segunda gráfica presenta el árbol filogenético construido a partir de las secuencias alineadas. Este árbol nos muestra las relaciones evolutivas entre los virus, donde las ramas más cercanas indican una mayor similitud genética. En este caso, podemos observar la posición del SARS-CoV-2 en el árbol y determinar qué otros virus están más estrechamente relacionados con él.
+
+En base a estos análisis, podemos llegar a las siguientes conclusiones:
+
+El SARS-CoV-2 comparte similitudes genéticas con otros coronavirus humanos que ocasionan enfermedades similares, como el MERS. Esto respalda la hipótesis de que estos virus pertenecen a la misma familia y comparten un ancestro común.
+Al analizar las bases nucleotídicas, es posible identificar patrones específicos en las secuencias del SARS-CoV-2 y otros coronavirus humanos. Estos patrones podrían estar asociados a la función y características de estos virus, como su capacidad de infectar a los seres humanos.
+El árbol filogenético nos muestra las relaciones evolutivas entre los virus. Podemos observar qué virus están más estrechamente relacionados con el SARS-CoV-2 y determinar su grado de similitud genética.
+
+*Link del video:   https://youtu.be/xPpmWqsJiQg      *
+
+*Referencias:*
+
+COVID-19 Map - Johns Hopkins Coronavirus Resource Center. (n.d.). Johns Hopkins Coronavirus Resource Center. https://coronavirus.jhu.edu/map.html
+Seguimiento de las variantes del SARS-CoV-2. (n.d.). https://www.who.int/es/activities/tracking-SARS-CoV-2-variants
+Periodística, E. (2019). Fuentes oficiales para consultar información sobre COVID-19 en países de Iberoamérica. Fundación Gabo. https://fundaciongabo.org/es/noticias/articulo/fuentes-oficiales-para-consultar-informacion-sobre-covid-19-en-paises-de
+Zhou, P., Yang, X. L., Wang, X. G., Hu, B., Zhang, L., Zhang, W., ... & Shi, Z. L. (2020). A pneumonia outbreak associated with a new coronavirus of probable bat origin. Nature, 579(7798), 270-273.
+
+Lam, T. T., Shum, M. H., Zhu, H. C., Tong, Y. G., Ni, X. B., Liao, Y. S., ... & Cheung, W. Y. (2020). Identifying SARS-CoV-2 related coronaviruses in Malayan pangolins. Nature, 583(7815), 282-285

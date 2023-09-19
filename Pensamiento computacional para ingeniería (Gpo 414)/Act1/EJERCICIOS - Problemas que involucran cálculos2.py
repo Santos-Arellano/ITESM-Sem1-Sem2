@@ -1,0 +1,10 @@
+print("Dame la calificacion de la primera materia")
+Mat_1=int(input())
+print("Dame la calificacion de la segunda materia")
+Mat_2=int(input())
+print("Dame la calificacion de la tercera materia")
+Mat_3=int(input())
+print("Dame la calificacion de la cuarta materia")
+Mat_4=int(input())
+Prom=(Mat_1+Mat_2+Mat_3+Mat_4)/4
+print("Tu promedio es", Prom)

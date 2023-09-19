@@ -1,0 +1,122 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "npm start",
+      "name": "Run npm start",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "type": "lldb",
+      "request": "attach",
+      "name": "Attach",
+      "program": "${workspaceFolder}/<program>"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "(lldb) Iniciar",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "Escriba el nombre del programa; por ejemplo, ${workspaceFolder}/a.out.",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    },
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+        "pipeArgs": [],
+        "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+      }
+    },
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+        "pipeArgs": [],
+        "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+        "pipeArgs": [],
+        "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+        "pipeArgs": [],
+        "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "externalConsole": false,
+      "cwd": "/Users/santosarellanoolarte/Library/CloudStorage/OneDrive-InstitutoTecnologicoydeEstudiosSuperioresdeMonterrey/ITESM GDL/Tercer periodo/Pensamiento computacional orientado a objetos (Gpo 314)/clase4-15-nov-22",
+      "program": "/Users/santosarellanoolarte/Library/CloudStorage/OneDrive-InstitutoTecnologicoydeEstudiosSuperioresdeMonterrey/ITESM GDL/Tercer periodo/Pensamiento computacional orientado a objetos (Gpo 314)/clase4-15-nov-22/build/Debug/outDebug",
+      "MIMode": "gdb"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+print("Dame la cantidad de juegos nuevos")
+nuevos=int(input())
+Precio_nuevos=(nuevos*1000)
+print("Dame la cantidad de juegos usados")
+usados=int(input())
+Precio_usados=(usados*350)
+completo=(Precio_nuevos+Precio_usados)
+print("El total de la compra es ", completo)

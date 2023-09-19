@@ -1,0 +1,59 @@
+---
+title: "ggplot2"
+output: html_document
+date: "2023-04-25"
+---
+
+```{r}
+ library("tidyverse")
+library("ggplot2")
+library("svglite")
+#Buscar cheat sheet https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf
+p <- ggplot(iris)
+p <- p + aes(x = Petal.Length, y = Petal.Width, colour = Species)
+summary(p)
+p <- p + geom_point()
+p <- p + geom_line()
+p
+
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + geom_point()
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point() + geom_smooth()
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + geom_point()
+
+ggsave("mi_grafico.png")
+
+# Guardar el gráfico como un archivo PNG con un ancho de 10 pulgadas y una altura de 5 pulgadas
+ggsave("mi_grafico.png", plot = p, width = 10, height = 5)
+
+# Guardar el gráfico como un archivo PDF con una resolución de 600 ppp
+ggsave("mi_grafico.pdf", plot = p, dpi = 600)
+getwd
+
+# Guardar el gráfico en un directorio específico
+ggsave("~/Biología ComputacionalOSIRIS/Sesión 07/imagenes/mi_grafico.svg", plot = p)
+
+#Hacer que el grafico se visualice en tama?o correcto. 
+#Facetas
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) + 
+    geom_point() + geom_smooth() + 
+  facet_grid(~ Species)
+
+#Cambia el tema del grafico y colores. 
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) + 
+  geom_point() + geom_smooth() + facet_grid(~ Species) +
+  theme_bw()
+
+#Mas caracteristicas de visualización
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point(size = 1) +
+  geom_smooth() +
+  facet_grid(~ Species) +
+  theme_bw() +
+  xlab("Longitud del pétalo") +
+  ylab("Ancho del pétalo") +
+  ggtitle("Relación entre longitud y ancho del pétalo para diferentes especies de iris") +
+  scale_color_manual(values = c("red", "blue", "green"), name = "") +
+  theme(legend.position = "bottom")
+```
+

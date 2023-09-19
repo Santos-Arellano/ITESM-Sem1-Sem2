@@ -1,0 +1,332 @@
+---
+title: "Actividad colaborativa en clase | Ejercicios R"
+author: Santos Alejandro Arellano Olarte
+output: html_document
+date: "2023-04-14"
+#Santos ALejandro Arellano Olarte A01643742
+#Arturo Ramos Martinez  A01643269
+
+#1. Escribe una función que genere una secuencia aleatoria de DNA de tamaño “n”.
+---
+```{r}
+secuenciaAleatoria<-function(){
+  num = readline();
+  lista_ADN<-c("A","T","C","G")
+  randADN <-sample(lista_ADN,num,replace=T)
+  return (paste(randADN, collapse = ''))
+}
+secuenciaAleatoria()
+
+```
+2. Codifica una función que calcula el tamaño de una secuencia de DNA.
+
+```{r}
+library(stringr)
+len_ADN<-function(ADN){
+  l<-str_length(c(ADN))
+  return(sprintf("El tamaño de la secuencia es: %s",l))
+}
+ADN<-("CTACCCCAGAATTGCTATAAACTGGCTGTCAGGGACTCTGTCTTGTAACTAAGCACTCCATCAGTACTACATAAGGCTGTAGGCGAAGAGAGACGAAAAC")
+len_ADN(ADN)
+```
+3. Crea una función que recibe una secuencia de DNA e imprime el porcentaje de cada base
+en la secuencia.
+```{r}
+library(stringr)
+porcentajeBases <- function(secuencia){
+  a <- sum(str_count(secuencia, "A"))
+  t <- sum(str_count(secuencia, "T"))
+  c <- sum(str_count(secuencia, "C"))
+  g <- sum(str_count(secuencia, "G"))
+  
+  total <- nchar(secuencia)
+  print(secuencia)
+  
+  cat("Porcentaje de A:", round(a/total*100, 2), "%\n")
+  cat("Porcentaje de T:", round(t/total*100, 2), "%\n")
+  cat("Porcentaje de C:", round(c/total*100, 2), "%\n")
+  cat("Porcentaje de G:", round(g/total*100, 2), "%\n")
+}
+
+porcentajeBases(secuenciaAleatoria())
+```
+
+4. Programa una función que transcribe DNA a RNA:
+
+```{r}
+library(stringr)
+Transcripcion<-function(secuencia){
+  secuencia<-str_split(secuencia,"",simplify = TRUE)
+  secuencia<-as.character(secuencia)
+  secuencia2<-secuencia
+  print("ADN: ")
+  print(paste(secuencia, collapse = ''))
+  ARN<-c()
+  for(i in 1:length(secuencia2)){
+    if(secuencia[i]=="A"){
+    ARN = c(ARN,"U")
+  }else{
+    if(secuencia[i]=="T"){
+    ARN = c(ARN,"A")
+    }
+    else{
+      if(secuencia[i]=="G"){
+        ARN = c(ARN,"C")
+      }else{
+        if(secuencia[i]=="C"){
+          ARN = c(ARN,"G")
+        }
+      }
+    }
+  }
+    secuencia[-i]
+  }
+  print("ARN: ")
+  print(paste(ARN, collapse = ''))
+  return(paste(ARN, collapse = ''))
+}
+transcripcion(secuenciaAleatoria())
+```
+5. Crea una función que traduce una secuencia de RNA a una secuencia de proteínas.
+
+```{r}
+library(stringr)
+ARN_proteinas<-function(ARN){
+  ARN2<-ARN
+  ARN3<-c()
+  ARN<-str_split(ARN,"",simplify = TRUE)
+  ARN<-as.character(ARN)
+    c<-0
+    for (i in 1:length(ARN)){
+      c<-c+1
+      ARN3 = c(ARN3,ARN[i])
+      if(c==3){
+      ARN3 = c(ARN3,",")
+      c<-0
+    }
+    }
+    ARN3<-paste(ARN3, collapse = '')
+    ARN3<-str_split(ARN3,",",simplify = T)
+    inicioV<-c()
+    inicio<-0
+    fin<-0
+    finV<-c()
+    for (a in 1:length(ARN3)){
+      if(ARN3[a]==c("AUG")){
+        inicioV=c(inicioV,a)
+        inicio<-max(inicioV)
+      }
+    }
+    ARN3a<-c()
+    for(h in inicio:length(ARN3)-inicio){
+      ARN3a=c(ARN3a,ARN3[inicio+h])
+    }
+    for( f in 1:length(ARN3a)){
+      if (ARN3a[f]=="UAA" | ARN3a[f]=="UAG" | ARN3a[f]=="UGA" ){
+        finV=c(finV,f)
+        fin<-min(finV)
+      }
+    }
+
+    if(inicio==0 | fin ==0){
+      print("No hay secuencia de proteinas")
+      break
+    }
+    ARN3n<-c()
+    ARN3n = c(ARN3n,ARN3a[1:fin])
+    print(ARN3n)
+    ARN3n<-str_replace(ARN3n,ARN3n[1],"Met")
+    ARN3n<-str_replace(ARN3n,ARN3n[length(ARN3n)],"Stop")
+    ARN3n<-str_replace_all(ARN3n,"UGG","Trp")
+    for (r in 1:length(ARN3n)){
+      if (ARN3n[r]=="UUU" | ARN3n[r]=="UUC" ){
+        ARN3n<-str_replace(ARN3n,ARN3n[r],"Phe")
+      }else{
+        if(ARN3n[r]=="UUA" | ARN3n[r]=="UUG" | ARN3n[r]=="CUU" | ARN3n[r]=="CUC" | ARN3n[r]=="CUA" | ARN3n[r]=="CUG"){
+          ARN3n<-str_replace(ARN3n,ARN3n[r],"Leu")
+        }else{
+          if(ARN3n[r]=="AUU" | ARN3n[r]=="AUC" |  ARN3n[r]=="AUA"){
+            ARN3n<-str_replace(ARN3n,ARN3n[r],"ile")
+          }else{
+            if(ARN3n[r]=="GUU" | ARN3n[r]=="GUC" | ARN3n[r]=="GUA" | ARN3n[r]=="GUG"){
+              ARN3n<-str_replace(ARN3n,ARN3n[r],"Val")
+            }else{
+              if(ARN3n[r]=="UCU" | ARN3n[r]=="UCC" | ARN3n[r]=="UCA" | ARN3n[r]=="UCG" | ARN3n[r]=="AGU" | ARN3n[r]=="AGC"){
+                ARN3n<-str_replace(ARN3n,ARN3n[r],"Ser")
+              }else{
+                if(ARN3n[r]=="CCU" | ARN3n[r]=="CCC" | ARN3n[r]=="CCA" | ARN3n[r]=="CCG"){
+                  ARN3n<-str_replace(ARN3n,ARN3n[r],"Pro")
+                }else{
+                  if(ARN3n[r]=="ACU" | ARN3n[r]=="ACC" | ARN3n[r]=="ACA" | ARN3n[r]=="ACG"){
+                    ARN3n<-str_replace(ARN3n,ARN3n[r],"Thr")
+                  }else{
+                    if(ARN3n[r]=="GCU" | ARN3n[r]=="GCC" | ARN3n[r]=="GCA" | ARN3n[r]=="GCG"){
+                      ARN3n<-str_replace(ARN3n,ARN3n[r],"Ala")
+                    }else{
+                      if(ARN3n[r]=="UAU" | ARN3n[r]=="UAC"){
+                        ARN3n<-str_replace(ARN3n,ARN3n[r],"Tyr")
+                      }else{
+                        if(ARN3n[r]=="CAU" | ARN3n[r]=="CAC"){
+                          ARN3n<-str_replace(ARN3n,ARN3n[r],"His")
+                        }else{
+                          if(ARN3n[r]=="CAA" | ARN3n[r]=="CAG"){
+                            ARN3n<-str_replace(ARN3n,ARN3n[r],"Gin")
+                          }else{
+                            if(ARN3n[r]=="AAU" | ARN3n[r]=="AAC"){
+                              ARN3n<-str_replace(ARN3n,ARN3n[r],"Asn")
+                            }else{
+                              if(ARN3n[r]=="AAA" | ARN3n[r]=="AAG"){
+                                ARN3n<-str_replace(ARN3n,ARN3n[r],"Lys")
+                              }else{
+                                if(ARN3n[r]=="GAU" | ARN3n[r]=="GAC"){
+                                  ARN3n<-str_replace(ARN3n,ARN3n[r],"Asp")
+                                }else{
+                                  if(ARN3n[r]=="GAA" | ARN3n[r]=="GAG"){
+                                    ARN3n<-str_replace(ARN3n,ARN3n[r],"Glu")
+                                  }else{
+                                    if(ARN3n[r]=="UGU" | ARN3n[r]=="UGC"){
+                                      ARN3n<-str_replace(ARN3n,ARN3n[r],"Cys")
+                                    }else{
+                                      if(ARN3n[r]=="CGU" | ARN3n[r]=="CGC" | ARN3n[r]=="CGA" | ARN3n[r]=="CGG" | ARN3n[r]=="AGA" | ARN3n[r]=="AGG" ){
+                                        ARN3n<-str_replace(ARN3n,ARN3n[r],"Arg")
+                                      }else{
+                                        if(ARN3n[r]=="GGU" | ARN3n[r]=="GGC" | ARN3n[r]=="GGA" | ARN3n[r]=="GGG"){
+                                          ARN3n<-str_replace(ARN3n,ARN3n[r],"Gly")
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    print("Secuencia de proteínas:")
+    print(ARN3n)
+}
+
+
+
+ARN_proteinas(transcripcion(secuenciaAleatoria()))
+
+
+```
+
+6. Para representar una molécula de ADN de doble hebra basta con escribir la secuencia de
+una de sus hebras. Consideremos, por ejemplo, la secuencia TGCGATAC. Como no
+se indica lo contrario, se asume que la secuencia está escrita en sentido 5'→3' y, por lo
+tanto, se trata de la hebra directa (forward strand):
+Hebra directa: 5'-TGCGATAC-3'
+Análogamente, si decido escribir esta misma secuencia empezando por el extremo 3’ se
+obtiene la hebra inversa (reverse strand):
+Hebra inversa: 3'-CATAGCGT-5'
+Escribe una función que recibe una hebra directa y regresa la hebra inversa.
+
+```{r}
+hebra_inversa <- function(secuencia){
+
+  secuencia_vector <- strsplit(secuencia, "")[[1]]
+  
+
+  secuencia_vector_inversa <- rev(secuencia_vector)
+  
+
+  secuencia_inversa <- paste(secuencia_vector_inversa, collapse = "")
+  
+
+  cat(sprintf("La hebra inversa es: %s\n", secuencia_inversa))
+}
+
+
+cat("Ingresa la secuencia de la hebra directa: ")
+secuencia_directa <- readline()
+
+
+hebra_inversa(secuencia_directa)
+
+```
+7. Normalmente se representa la molécula escribiendo primero la hebra directa y debajo la
+hebra complementaria (complementary strand). La hebra complementaria se escribe en
+sentido 3'→5' para que las bases de ambas hebras queden emparejadas:
+a. Hebra directa: 5'-TGCGATAC-3'
+b. Hebra complementaria: 3'-ACGCTATG-5'.
+Escribe una función qué recibe una hebra directa y obtiene la hebra complementaria.
+
+```{r}
+complemento <- function(secuencia) {
+
+  diccionario <- c("A"="T", "T"="A", "C"="G", "G"="C")
+  
+ 
+  bases <- strsplit(secuencia, "")[[1]]
+  
+
+  complementaria <- sapply(bases, function(base) diccionario[[base]])
+  
+
+  return(paste(complementaria, collapse=""))
+}
+
+cat("Ingresa de nuevo una  secuencia de la hebra directa: ")
+secuencia_directa <- readline()
+hebra_directa <- secuencia_directa
+hebra_complementaria <- complemento(hebra_directa)
+print(paste("Hebra directa: 5'-", hebra_directa, "-3'", sep=""))
+print(paste("Hebra complementaria: 3'-", hebra_complementaria, "-5'", sep=""))
+```
+8. Si escribimos la secuencia de la hebra complementaria en sentido inverso (5'→3') se obtiene
+la complementaria inversa (reverse-complement):
+a. Hebra complementaria: 3'-ACGCTATG-5'
+b. Hebra complementaria inversa: 5'-GTATCGCA-3'
+Escribe la función en R para obtener la hebra complementaria inversa, desde una hebra complementaria.
+```{r}
+complemento_inversa <- function(secuencia) {
+
+  diccionario <- c("A"="T", "T"="A", "C"="G", "G"="C")
+  
+ 
+  bases <- strsplit(secuencia, "")[[1]]
+  
+
+  complementaria <- sapply(bases, function(base) diccionario[[base]])
+  
+  
+  complementaria_inversa <- paste(rev(complementaria), collapse="")
+  
+  cat("Hebra complementaria inversa: 5'-", complementaria_inversa, "-3'\n")
+  
+
+  return(complementaria_inversa)
+}
+
+
+cat("Introduce la secuencia complementaria: ")
+secuencia_complementaria <- readline()
+
+
+complementaria <- complemento(secuencia_complementaria)
+cat("Hebra directa: 3'-", complementaria, "-5'\n")
+
+cat("Hebra complementaría: 3'-", secuencia_complementaria, "-5'\n")
+
+complementaria_inversa <- complemento_inversa(complementaria)
+
+```
+
+
+
+
+
+
+
+

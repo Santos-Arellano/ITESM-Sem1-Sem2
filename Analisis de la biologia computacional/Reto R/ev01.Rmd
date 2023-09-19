@@ -1,0 +1,174 @@
+---
+title: "Evidencia 1 | Análisis inicial"
+author: Santos Arellano, A01643742
+output: html_document
+date: "2023-04-27"
+---
+
+
+#1.-Obtén las secuencias de las variantes de SARS-CoV-2 desde el NCBILinks to an external site. o el buscador de virus del NCBI
+```{r}
+library("seqinr")
+library("ggplot2")
+
+# Ruta de acceso a la carpeta donde se encuentran los archivos fasta
+ruta <- "/Users/santosarellanoolarte/Downloads/Reto R/variantes virus covid/"
+
+# Lectura de los archivos fasta y asignación a objetos
+omicron <- read.fasta(paste0(ruta, "omicron.fasta"))
+south_africa <- read.fasta(paste0(ruta, "(south africa).fasta"))
+america <- read.fasta(paste0(ruta, "(America).fasta"))
+brazil <- read.fasta(paste0(ruta, "(brazil).fasta"))
+colombia <- read.fasta(paste0(ruta, "(colombia).fasta"))
+france <- read.fasta(paste0(ruta, "(france).fasta"))
+india <- read.fasta(paste0(ruta, "(india).fasta"))
+italy <- read.fasta(paste0(ruta, "(italy).fasta"))
+mexico <- read.fasta(paste0(ruta, "(mexico).fasta"))
+peru <- read.fasta(paste0(ruta, "(peru).fasta"))
+roma <- read.fasta(paste0(ruta, "(roma).fasta"))
+russia <- read.fasta(paste0(ruta, "(russia).fasta"))
+spain <- read.fasta(paste0(ruta, "(spain).fasta"))
+uk <- read.fasta(paste0(ruta, "(uk).fasta"))
+
+
+
+```
+
+
+#2.-Calcula la longitud de las secuencias de cada variante.
+```{r}
+
+length(omicron[[1]])
+length(south_africa[[1]])
+length(america[[1]])
+length(brazil[[1]])
+length(colombia[[1]])
+length(france[[1]])
+length(india[[1]])
+length(italy[[1]])
+length(mexico[[1]])
+length(peru[[1]])
+length(roma[[1]])
+length(russia[[1]])
+length(spain[[1]])
+length(uk[[1]])
+
+```
+
+#3.-Crea una gráfica donde compares las bases de ADN que componen a cada una de las variantes del virus.
+```{r}
+
+
+tabla <- data.frame(
+  Virus = rep(c("Omicron", "South Africa", "America", "Brazil", "Colombia", "France", "India", "Italy", "Mexico", "Peru", "Roma", "Russia", "Spain", "UK"), each = 4),
+  Nucleotido = rep(c("Adenina", "Citosina", "Guanina", "Timina"), 14),
+  Frecuencia = c(count(omicron[[1]], 1), count(south_africa[[1]], 1), count(america[[1]], 1), count(brazil[[1]], 1), count(colombia[[1]], 1), count(france[[1]], 1), count(india[[1]], 1), count(italy[[1]], 1), count(mexico[[1]], 1), count(peru[[1]], 1), count(roma[[1]], 1), count(russia[[1]], 1), count(spain[[1]], 1), count(uk[[1]], 1))
+)
+
+ggplot(data = tabla, aes(x = Virus, y = Frecuencia, fill = Nucleotido)) + 
+  geom_bar(position = "dodge", stat = "identity") + 
+  labs(x = "Variantes del virus", y = "Número de bases de ADN", 
+       title = "Número de bases de ADN por variante del virus") + 
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 0.5), 
+        legend.title = element_blank(),
+        legend.position = "top")
+
+
+
+```
+
+4.-¿Cuál es el %GC de cada variante?
+```{r}
+
+gcp<- function(x) {
+  GC(x[[1]]) * 100
+}
+#%GC de la variante omicron
+gcp(omicron)
+
+#%GC de la variante  south_africa 
+gcp(south_africa)
+
+#%GC de la variante america 
+gcp(america)
+
+#%GC de la variante brazil
+gcp(brazil)
+
+#%GC de la variante colombia
+gcp(colombia)
+
+#%GC de la variante france
+gcp(france)
+
+#%GC de la variante india
+gcp(india)
+
+#%GC de la variante italy 
+gcp(italy)
+
+#%GC de la variante mexico 
+gcp(mexico)
+
+#%GC de la variante peru 
+gcp(peru)
+
+#%GC de la variante roma
+gcp(roma)
+
+#%GC de la variante russia
+gcp(russia)
+#%GC de la variante spain 
+gcp(spain)
+
+
+```
+
+5.-Crea las secuencias contrasentido de cada variante.
+```{r}
+complementaria <- function(secuencia){
+  secuencia[[1]][c(1:10,(length(secuencia[[1]])-10):length(secuencia[[1]]))]
+  comp(secuencia[[1]])[c(1:10,(length(secuencia[[1]])-10):length(secuencia[[1]]))]
+}
+
+# contrasentido de la variante omicron
+rev(complementaria(omicron))
+
+#contrasentido de la variante south_africa
+rev(complementaria(south_africa))
+
+#contrasentido de la variante america
+rev(complementaria(america))
+
+#contrasentido de la variante brazil
+rev(complementaria(brazil))
+
+#contrasentido de la variante colombia
+rev(complementaria(colombia))
+
+#contrasentido de la variante france
+rev(complementaria(france))
+
+#contrasentido de la variante india
+rev(complementaria(india))
+
+#contrasentido de la variante italy
+rev(complementaria(italy))
+
+#contrasentido de la variante mexico
+rev(complementaria(mexico))
+
+#contrasentido de la variante peru
+rev(complementaria(peru))
+
+#contrasentido de la variante roma
+rev(complementaria(roma))
+
+#contrasentido de la variante russia
+rev(complementaria(russia))
+
+#contrasentido de la variante spain
+rev(complementaria(spain))
+
+```
